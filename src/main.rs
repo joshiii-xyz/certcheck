@@ -15,7 +15,13 @@ struct Args {
 fn main() -> Result<()> {
     let args = Args::parse();
     let output = Command::new("openssl")
-        .args(["s_client", "-connect", &format!("{}:{}", args.host, args.port), "-servername", &args.host])
+        .args([
+            "s_client",
+            "-connect",
+            &format!("{}:{}", args.host, args.port),
+            "-servername",
+            &args.host,
+        ])
         .output()?;
 
     let stdout = String::from_utf8_lossy(&output.stdout);
